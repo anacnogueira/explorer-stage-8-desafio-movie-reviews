@@ -12,18 +12,12 @@ export class UsersController {
     const { name, email, password } = request.body;
 
     const checkUserExists = await connection("users").where({ email });
-    console.log(checkUserExists);
 
     if (checkUserExists.length > 0) {
       throw new AppError("This email is already in use");
     }
 
     const hashedPassword = await hash(password, 8);
-
-    /*await database.run(
-      "INSERT INTO users (name, email, password) VALUES(?, ?, ?)",
-      [name, email, hashedPassword]
-    );*/
 
     await connection("users").insert({
       name,
@@ -32,5 +26,13 @@ export class UsersController {
     });
 
     return response.status(201).json({});
+  }
+
+  async show(request, response) {
+    const { id } = request.params;
+
+    const user = await connection("users").where({ id }).first();
+
+    response.json(user);
   }
 }
