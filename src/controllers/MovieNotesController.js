@@ -63,4 +63,18 @@ export class MovieNotesController {
 
     response.json();
   }
+
+  async show(request, response) {
+    const { user_id, id } = request.params;
+
+    const note = await connection("movie_notes").where({ id }).first();
+    const tags = await connection("movie_tags")
+      .where({ user_id })
+      .where("note_id", note.id)
+      .orderBy("name");
+    return response.json({
+      ...note,
+      tags,
+    });
+  }
 }
