@@ -85,4 +85,11 @@ export class UsersController {
 
     response.json({});
   }
+
+  async delete(request, response) {
+    const { id } = request.params;
+    await connection("users").where({ id }).delete();
+
+    return response.json();
+  }
 }
