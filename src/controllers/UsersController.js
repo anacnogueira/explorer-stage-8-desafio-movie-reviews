@@ -1,7 +1,6 @@
 import { connection } from "../database/knex/index.js";
 import { AppError } from "../utils/AppError.js";
 import { hash, compare } from "bcryptjs";
-import knex from "knex";
 
 export class UsersController {
   async index(request, response) {
