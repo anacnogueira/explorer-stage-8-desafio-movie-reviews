@@ -8,3 +8,4 @@ const movieNoteController = new MovieNotesController();
 movieNotesRoutes.get("/:user_id", movieNoteController.index);
 movieNotesRoutes.post("/:user_id", movieNoteController.create);
 movieNotesRoutes.get("/:user_id/:id", movieNoteController.show);
+movieNotesRoutes.delete("/:user_id/:id", movieNoteController.delete);

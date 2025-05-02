@@ -77,4 +77,12 @@ export class MovieNotesController {
       tags,
     });
   }
+
+  async delete(request, response) {
+    const { user_id, id } = request.params;
+
+    await connection("movie_notes").where({ user_id }).where({ id }).delete();
+
+    return response.json();
+  }
 }
